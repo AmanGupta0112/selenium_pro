@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+</head>
+<body>
+    <form method="post" action="{% url 'cibil:suit_cibil_search' %}">
+        {% csrf_token %}
+        <label for="borrower_name">BORROWER NAME :</label>
+        <input type="text" id="borrower_name" name="borrower_name"><br>
+        
+        <label for="director_name">DIRECTOR NAME:</label>
+        <input type="text" id="director_name" name="director_name"><br>
+        
+        <label for="din_number">DIN NUMBER:</label>
+        <input type="text" id="din_number" name="din_number"><br>
+        
+        <label for="city">CITY:</label>
+        <input type="text" id="city" name="city"><br>
+        
+        <label for="institutions">NAMES OF CREDIT INSTITUTIONS:</label>
+        <select id="institutions" name="institutions">
+            <option value="ALL">ALL</option>
+            {% for cr in credits %}
+                <option value="{{cr}}">{{cr}}</option>
+            {% endfor %}
+        </select><br>
+        
+        <label for="state_union">STATE/UNION TERRITORY:</label>
+        <select id="state_union" name="state_union">
+            <option value="Select">Select</option>
+            {% for st in states %}
+                <option value="{{st}}">{{st}}</option>
+            {% endfor %}
+        </select><br>
+        <input type="hidden" id="request_list" name="request_list" value="{{request_list.0}}">
+        <input type="hidden" id="request_list" name="request_list" value="{{request_list.1}}">
+        <input type="hidden" id="request_list" name="request_list" value="{{request_list.2}}">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

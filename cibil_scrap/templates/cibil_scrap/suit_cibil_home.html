@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Form</title>
+    <style>
+        .form-row {
+            margin-bottom: 10px; /* Adjust margin as needed */
+        }
+        .form-row label {
+            display: inline-block;
+            width: 500px; /* Adjust label width as needed */
+            vertical-align: top;
+        }
+        .form-row select {
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dropdown Form</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="quarterIdSummary">Status of data received - Summary:</label>
+            <select id="quarterIdSummary" name="quarterIdSummary">
+                <option value="None">DATE</option>
+                {% for date in dates %}
+                    <option value="{{date}}">{{date}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="quarterIdGrantors">Status of data received - List of Credit Institutions:</label>
+            <select id="quarterIdGrantors" name="quarterIdGrantors">
+                <option value="None">DATE</option>
+                {% for date in dates %}
+                    <option value="{{date}}">{{date}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <form method="post" action="{% url 'cibil:cibil_search' %}">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="croreAccount">Suit Filed Accounts - Defaulters Rs 1 crore and above:</label>
+            <select name="croreAccount">
+                <option value="None">Option</option>
+                {% for op in options %}
+                    <option value="{{op}}">{{op}}</option>
+                {% endfor %}
+            </select>
+            <select name="croreAccount">
+                <option value="None">DATE</option>
+                {% for date in dates %}
+                    <option value="{{date}}">{{date}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <form method="post" action="{% url 'cibil:cibil_search' %}">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="lakhAccount">Suit Filed Accounts - Wilful Defaulters Rs 25 lacs and above:</label>
+            <select name="lakhAccount">
+                <option value="None">Option</option>
+                {% for op in options %}
+                    <option value="{{op}}">{{op}}</option>
+                {% endfor %}
+            </select>
+            <select  name="lakhAccount">
+                <option value="None">DATE</option>
+                {% for date in dates %}
+                    <option value="{{date}}">{{date}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>
